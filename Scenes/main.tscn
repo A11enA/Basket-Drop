@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwnigy13mgsc"]
+[gd_scene load_steps=5 format=3 uid="uid://bwnigy13mgsc"]
 
-[ext_resource type="Script" path="res://main.gd" id="2_n74ed"]
+[ext_resource type="PackedScene" uid="uid://tp8e0qydnc3" path="res://Scenes/player.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://cf08qo8y0k0jd" path="res://Scripts/main.gd" id="2_n74ed"]
+[ext_resource type="Texture2D" uid="uid://e8d1b1boocnd" path="res://Assets/Background/Untitled-1.png" id="3_8gbba"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3x1bp"]
 size = Vector2(1142.5, 20)
@@ -11,13 +13,16 @@ offset_bottom = 651.0
 script = ExtResource("2_n74ed")
 metadata/_edit_lock_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(577, 319)
+texture = ExtResource("3_8gbba")
+
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(82, -99.9972)
 rotation = 0.00271122
-metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
 metadata/_edit_lock_ = true
@@ -27,5 +32,15 @@ position = Vector2(579.75, 777)
 shape = SubResource("RectangleShape2D_3x1bp")
 metadata/_edit_lock_ = true
 
+[node name="Player" parent="." instance=ExtResource("2_bo1nx")]
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(100, 555)
+
+[node name="junkTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="junkTimer" to="." method="_on_junk_timer_timeout"]

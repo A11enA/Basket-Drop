@@ -1,3 +1,42 @@
-[gd_scene format=3 uid="uid://tp8e0qydnc3"]
+[gd_scene load_steps=7 format=3 uid="uid://tp8e0qydnc3"]
+
+[ext_resource type="Script" uid="uid://cydhp86mc0p6d" path="res://Scripts/player.gd" id="1_vgqql"]
+[ext_resource type="Texture2D" uid="uid://668hytpbbsc7" path="res://Assets/Player/Basket.png" id="2_fkybt"]
+[ext_resource type="Texture2D" uid="uid://bci4fsec5pgx3" path="res://Assets/Player/Full-Basket.png" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://bl086d7vjtrpr" path="res://Assets/Player/Spilled-Basket.png" id="4_3smsa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8erm5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x3wgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fkybt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3smsa")
+}],
+"loop": true,
+"name": &"Fruits",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vgqql"]
+height = 24.02401
 
 [node name="Player" type="Area2D"]
+script = ExtResource("1_vgqql")
+
+[node name="Sprites" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8erm5")
+animation = &"Fruits"
+frame = 1
+frame_progress = 0.37176555
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, -4)
+scale = Vector2(-10.582852, 8.889681)
+shape = SubResource("CapsuleShape2D_vgqql")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

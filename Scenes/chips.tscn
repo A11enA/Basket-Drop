@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://k1d3r1orlnrh"]
+
+[ext_resource type="Texture2D" uid="uid://dnbkgxyg6wfw2" path="res://Assets/Junk/Chips.png" id="1_2fqdv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bresn"]
+radius = 49.162994
+
+[node name="Candy" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bresn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(19, -1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_2fqdv")
