@@ -1,21 +1,18 @@
 extends Area2D
 
-@export var speed = 400 # How fast the player will move (pixels/sec). 
+@export var speed = 600 # How fast the player will move (pixels/sec). 
 var screen_size # Size of the game window.
-
-@export var fruits = [preload("res://Scenes/apple.tscn"),preload("res://Scenes/bananas.tscn"),preload("res://Scenes/cherries.tscn")]
-@export var junks = [preload("res://Scenes/candy.tscn"),preload("res://Scenes/chicken.tscn"),preload("res://Scenes/chips.tscn")]
-
-
-signal goodHit
-signal badHit
 
 func start(pos):
 	position = pos
+	show()
+	$Sprites.animation = "empty"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	show()
+	hide()
 	screen_size = get_viewport_rect().size
+	$CollisionShape2D.set_deferred("disabled", false)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,8 +31,3 @@ func _process(delta: float) -> void:
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
-
-
-
-func _on_body_shape_entered(body: Node2D) -> void:
-	pass # Replace with function body.

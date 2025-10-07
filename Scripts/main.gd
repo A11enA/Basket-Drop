@@ -3,13 +3,20 @@ extends TextureRect
 @export var time_low = 0.5
 @export var time_high = 1.5
 
-@export var fruits = [preload("res://Scenes/apple.tscn"),preload("res://Scenes/bananas.tscn"),preload("res://Scenes/cherries.tscn")]
-@export var junks = [preload("res://Scenes/candy.tscn"),preload("res://Scenes/chicken.tscn"),preload("res://Scenes/chips.tscn")]
+@export var fruits = [preload("res://Scenes/Fruit/apple.tscn"),preload("res://Scenes/Fruit/bananas.tscn"),preload("res://Scenes/Fruit/cherries.tscn")]
+@export var junks = [preload("res://Scenes/Junks/candy.tscn"),preload("res://Scenes/Junks/chicken.tscn"),preload("res://Scenes/Junks/chips.tscn")]
+
+var fruit = [get_tree().get_nodes_in_group("Fruits")]
+var junk = [get_tree().get_nodes_in_group("Junk")]
+
+var score: int
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pass
+
+func new_game():
 	$Player.start($Spawn.position)
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -37,3 +44,21 @@ func _on_junk_timer_timeout() -> void:
 	junk_to_spawn.rotation = randf_range(-3,3)
 	add_child(junk_to_spawn)
 	$Timer.wait_time = randf_range(time_low,time_high)
+
+
+func _on_hud_start_game() -> void:
+	$Player.show()
+	new_game()
+
+
+func _on_player_bad_hit() -> void:
+	score -= 1
+	$HUD.score_update()
+
+func _on_player_body_entered(body: Node2D) -> void:
+	if body == junk:
+		$Sprites.animation = "spilled"
+		print("bad")
+	if body == fruit:
+		$Sprites.animation = "full"
+		print("good")

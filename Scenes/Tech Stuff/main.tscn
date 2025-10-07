@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwnigy13mgsc"]
+[gd_scene load_steps=6 format=3 uid="uid://bwnigy13mgsc"]
 
-[ext_resource type="PackedScene" uid="uid://tp8e0qydnc3" path="res://Scenes/player.tscn" id="2_bo1nx"]
-[ext_resource type="Script" path="res://Scripts/main.gd" id="2_n74ed"]
-[ext_resource type="Texture2D" uid="uid://e8d1b1boocnd" path="res://Assets/Background/Untitled-1.png" id="3_8gbba"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_8j6ur"]
+[ext_resource type="Texture2D" uid="uid://e8d1b1boocnd" path="res://Assets/Background/Untitled-1.png" id="2_dwgoj"]
+[ext_resource type="PackedScene" uid="uid://tp8e0qydnc3" path="res://Scenes/Tech Stuff/player.tscn" id="3_3eef7"]
+[ext_resource type="PackedScene" uid="uid://7vwe7yn58fff" path="res://Scenes/Tech Stuff/hud.tscn" id="4_don8n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3x1bp"]
 size = Vector2(1142.5, 20)
@@ -10,12 +11,12 @@ size = Vector2(1142.5, 20)
 [node name="Main" type="TextureRect"]
 offset_right = 1151.0
 offset_bottom = 651.0
-script = ExtResource("2_n74ed")
+script = ExtResource("1_8j6ur")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(577, 319)
-texture = ExtResource("3_8gbba")
+texture = ExtResource("2_dwgoj")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
@@ -32,7 +33,7 @@ position = Vector2(579.75, 777)
 shape = SubResource("RectangleShape2D_3x1bp")
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("2_bo1nx")]
+[node name="Player" parent="." instance=ExtResource("3_3eef7")]
 
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(100, 555)
@@ -41,6 +42,11 @@ position = Vector2(100, 555)
 wait_time = 3.0
 autostart = true
 
+[node name="HUD" parent="." instance=ExtResource("4_don8n")]
+layout_mode = 1
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Player" to="." method="_on_player_body_entered"]
 [connection signal="timeout" from="junkTimer" to="." method="_on_junk_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]

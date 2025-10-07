@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://mco3rtj0ysmn" path="res://Assets/Junk/Candy.png" id="1_prm1k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bresn"]
-radius = 49.162994
+radius = 49.163
 
-[node name="Candy" type="RigidBody2D"]
+[node name="Candy" type="RigidBody2D" groups=["Junk"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bresn")
