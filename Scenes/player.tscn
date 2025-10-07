@@ -9,10 +9,10 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_x3wgy")
+"texture": ExtResource("2_fkybt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_fkybt")
+"texture": ExtResource("3_x3wgy")
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_3smsa")
@@ -31,8 +31,7 @@ script = ExtResource("1_vgqql")
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"Fruits"
-frame = 1
-frame_progress = 0.371766
+frame_progress = 0.645632
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(15, -4)
