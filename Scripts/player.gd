@@ -31,3 +31,7 @@ func _process(delta: float) -> void:
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
+
+
+func _on_sprite_timer_timeout() -> void:
+	$Sprites.animation = "empty"

@@ -6,8 +6,7 @@ extends TextureRect
 @export var fruits = [preload("res://Scenes/Fruit/apple.tscn"),preload("res://Scenes/Fruit/bananas.tscn"),preload("res://Scenes/Fruit/cherries.tscn")]
 @export var junks = [preload("res://Scenes/Junks/candy.tscn"),preload("res://Scenes/Junks/chicken.tscn"),preload("res://Scenes/Junks/chips.tscn")]
 
-var fruit = [get_tree().get_nodes_in_group("Fruits")]
-var junk = [get_tree().get_nodes_in_group("Junk")]
+
 
 var score: int
 
@@ -30,8 +29,6 @@ func _on_timer_timeout():
 	$Timer.wait_time = randf_range(time_low,time_high)
 
 
-
-
 func _on_area_2d_body_entered(body):
 	
 	body.queue_free()
@@ -50,15 +47,14 @@ func _on_hud_start_game() -> void:
 	$Player.show()
 	new_game()
 
-
-func _on_player_bad_hit() -> void:
-	score -= 1
-	$HUD.score_update()
-
 func _on_player_body_entered(body: Node2D) -> void:
-	if body == junk:
-		$Sprites.animation = "spilled"
+	if body.is_in_group("Junk"):
+		$Player/Sprites.play("spilled")
 		print("bad")
-	if body == fruit:
-		$Sprites.animation = "full"
+		score -= 1
+	if body.is_in_group("Fruits"):
+		$Player/Sprites.play("full")
 		print("good")
+		score += 1
+	$HUD.score_update(score)
+	$Player/spriteTimer.start()

@@ -33,21 +33,22 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vgqql"]
-height = 24.024
+radius = 8.88225
+height = 18.8983
 
 [node name="Player" type="Area2D"]
 script = ExtResource("1_vgqql")
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8erm5")
-animation = &"full"
+animation = &"spilled"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(15, -4)
+position = Vector2(13, -2)
 scale = Vector2(-10.5829, 8.88968)
 shape = SubResource("CapsuleShape2D_vgqql")
 
 [node name="spriteTimer" type="Timer" parent="."]
-wait_time = 0.6
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="timeout" from="spriteTimer" to="." method="_on_sprite_timer_timeout"]
