@@ -18,7 +18,7 @@ func show_message(text):
 	$messageTimer.start()
 	
 func score_update(score):
-	$ScoreText.text = str(score)
+	$scoreText.text = str(score)
 	
 	
 func show_game_over():

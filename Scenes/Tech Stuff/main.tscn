@@ -39,7 +39,6 @@ metadata/_edit_lock_ = true
 position = Vector2(100, 555)
 
 [node name="junkTimer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [node name="HUD" parent="." instance=ExtResource("4_don8n")]
