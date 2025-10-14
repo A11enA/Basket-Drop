@@ -16,13 +16,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -56.0
+offset_left = -24.0
 offset_top = 104.0
-offset_right = 58.0
+offset_right = 33.0
 offset_bottom = 173.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
-text = "0000"
+text = "0"
 
 [node name="messageText" type="Label" parent="."]
 layout_mode = 0
@@ -46,5 +46,17 @@ text = "<3"
 wait_time = 2.0
 one_shot = true
 
+[node name="stopWatchText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 560.0
+offset_right = 600.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 25
+text = "0
+"
+
+[node name="stopWatch" type="Timer" parent="."]
+
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
 [connection signal="timeout" from="messageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="timeout" from="stopWatch" to="." method="_on_stop_watch_timeout"]

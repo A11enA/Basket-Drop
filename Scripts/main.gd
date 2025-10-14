@@ -6,20 +6,40 @@ extends TextureRect
 @export var fruits = [preload("res://Scenes/Fruit/apple.tscn"),preload("res://Scenes/Fruit/bananas.tscn"),preload("res://Scenes/Fruit/cherries.tscn")]
 @export var junks = [preload("res://Scenes/Junks/candy.tscn"),preload("res://Scenes/Junks/chicken.tscn"),preload("res://Scenes/Junks/chips.tscn")]
 
-
-
 var score: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	$Player/CollisionShape2D.set_deferred("disabled", true)
+	$Timer.stop()
+	$junkTimer.stop()
 
 func new_game():
 	$Player.start($Spawn.position)
+	$Timer.start()
+	$junkTimer.start()
+	$Player/CollisionShape2D.set_deferred("disabled", false)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if score < 0:
+		game_over()
 
+
+func game_over():
+	$Player/CollisionShape2D.set_deferred("disabled", true)
+	$Player.visible = false
+	$HUD/stopWatch.stop()
+	score = 00
+	$HUD.score_update(score)
+	$Timer.stop()
+	$junkTimer.stop()
+	$HUD.show_message("The Picnic is ruined :(")
+	await $HUD/messageTimer.timeout
+	$HUD/messageText.text = "Fruit Basket"
+	$HUD/messageText.show()
+	$HUD/stopWatchText.text = "0"
+	$HUD/start.show()
+	
 
 func _on_timer_timeout():
 	var fruit_to_spawn = fruits[randi_range(0,2)].instantiate()
@@ -50,11 +70,9 @@ func _on_hud_start_game() -> void:
 func _on_player_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Junk"):
 		$Player/Sprites.play("spilled")
-		print("bad")
 		score -= 1
 	if body.is_in_group("Fruits"):
 		$Player/Sprites.play("full")
-		print("good")
 		score += 1
 	$HUD.score_update(score)
 	$Player/spriteTimer.start()
