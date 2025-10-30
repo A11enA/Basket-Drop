@@ -55,6 +55,14 @@ theme_override_font_sizes/font_size = 25
 text = "0
 "
 
+[node name="stopWatchText2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 247.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 15
+text = "Tip: use AD or LEFTRIGHT to move"
+
 [node name="stopWatch" type="Timer" parent="."]
 
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
